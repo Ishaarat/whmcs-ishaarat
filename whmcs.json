@@ -1,0 +1,28 @@
+{
+  "schema": "1.0",
+  "type": "whmcs-addons",
+  "name": "ishaarat",
+  "license": "proprietary",
+  "category": "marketing",
+  "description": {
+    "name": "Ishaarat Whasapp notifications",
+    "tagline": "Send your customers whatsapp notifications.",
+    "long": "Send your customers whatsapp notifications.",
+    "features": [
+    ]
+  },
+  "logo": {
+    "filename": "logo.png"
+  },
+  "support": {
+  },
+  "authors": [
+    {
+      "name": "Ishaarat",
+      "homepage": "https:\/\/www.ishaarat.com\/"
+    }
+  ],
+  "keywords": [
+    "whatsapp"
+  ]
+}
