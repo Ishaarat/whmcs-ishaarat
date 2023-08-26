@@ -1,0 +1,55 @@
+<?php
+$_ADDONLANG['lang'] = "العربية";
+
+$_ADDONLANG['newversion'] = "هناك تحديث للإضافة. يرجى زيارة <a href=\"https://github.com/ishaarat/whmcs-ishaarat\">صفحة Github</a> لتنزيل الإصدار الجديد.<br><br>الرجاء زيارة هذه الصفحة بعد انتهاء نقل الملف.<br><br>";
+$_ADDONLANG['uptodate'] = "إضافتك محدّثة بالفعل.";
+$_ADDONLANG['save'] = "حفظ";
+$_ADDONLANG['gsmnumberfield'] = "حقل رقم GSM/الجوال (حقل عميل مخصص)";
+$_ADDONLANG['wantsmsfield'] = "حقل الاشتراك بالرسائل القصيرة (حقل عميل مخصص)";
+$_ADDONLANG['user'] = "اسم المستخدم";
+$_ADDONLANG['pass'] = "كلمة المرور";
+$_ADDONLANG['apiid'] = "معرف API";
+$_ADDONLANG['email'] = "البريد الإلكتروني";
+$_ADDONLANG['countrycode'] = "الرمز البلدي (للبادئة)";
+$_ADDONLANG['senderid'] = "معرف المُرسِل (العنوان)";
+$_ADDONLANG['dateformat'] = "تنسيق التاريخ";
+$_ADDONLANG['sender'] = "المُرسِل";
+$_ADDONLANG['settings'] = "الإعدادات";
+$_ADDONLANG['signature'] = "التوقيع";
+$_ADDONLANG['clientsmstemplates'] = "قوالب العملاء";
+$_ADDONLANG['adminsmstemplates'] = "قوالب المشرف";
+$_ADDONLANG['sendsms'] = "إرسال الرسالة";
+$_ADDONLANG['messages'] = "الرسائل المُرسَلة";
+$_ADDONLANG['update'] = "تحديث";
+$_ADDONLANG['smssent'] = "<br><br><b>تم إرسال الرسالة</b>";
+$_ADDONLANG['client'] = "العميل";
+$_ADDONLANG['selectclient'] = "اختيار العميل";
+$_ADDONLANG['message'] = "الرسالة";
+$_ADDONLANG['debug'] = "طباعة السجل";
+$_ADDONLANG['send'] = "إرسال";
+$_ADDONLANG['debugsonuc'] = "النتيجة";
+$_ADDONLANG['gsmnumber'] = "رقم GSM";
+$_ADDONLANG['datetime'] = "تاريخ ووقت";
+$_ADDONLANG['status'] = "الحالة";
+$_ADDONLANG['delete'] = "حذف";
+$_ADDONLANG['parameter'] = "المعلمة:";
+$_ADDONLANG['active'] = "تنشيط";
+$_ADDONLANG['ekstra'] = "إضافي {x}";
+$_ADDONLANG['admingsm'] = "أرقام الجوال للمشرف";
+$_ADDONLANG['admingsmornek'] = "افصل الأرقام بفاصلة، مثل: 5321232525، 5331002020";
+$_ADDONLANG['lisans'] = "<a href=\"http://www.ishaarat.com\">تطوير بواسطة Ishaarat</a> - <a href=\"https://github.com/ishaarat/whmcs-ishaarat\">صفحة Github</a>";
+$_ADDONLANG['credit'] = "الرصيد المتبقي";
+$_ADDONLANG['auth_key'] = "مفتاح المصادقة";
+$_ADDONLANG['app_key'] = "مفتاح التطبيق";
+$_ADDONLANG['credit'] = "الرصيد المتبقي";
+$_ADDONLANG['error'] = "خطأ";
+$_ADDONLANG['pending'] = "قيد الانتظار";
+$_ADDONLANG['sent'] = "تم الإرسال";
+$_ADDONLANG['success'] = "نجاح";
+
+$_ADDONLANG['authkey'] = "مفتاح المصادقة";
+$_ADDONLANG['route'] = "مسار تسليم الرسالة (مثال: 4)";
+$_ADDONLANG['flash'] = "رسالة فلاش (نعم=1/لا=0)";
+$_ADDONLANG['unicode'] = "رسالة يونيكود (نعم=1/لا=0)";
+$_ADDONLANG['ignoreNdnc'] = "تجاهل أرقام الـ NDNC؟ (نعم=1/لا=0)";
+?>
