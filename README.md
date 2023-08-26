@@ -5,7 +5,7 @@ Ishaarat Whatsapp Module for WHMCS
 
 Installation
 
-    Upload files to your WHMCS root.
+    Upload files to your WHMCS root/modules/addons/ishaarat_wa
     Go to Admin Area. Enter Menu->Setup->Addon Modules and Activate Ishaarat Whatsapp
     After saving changes, give privigle to admin groups that you want at same page.
     Go to Menu->Setup->Custom Client Fields
