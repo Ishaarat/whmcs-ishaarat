@@ -16,7 +16,7 @@ if(!function_exists('AdminLogin_admin')){
         }
         $settings = $class->getSettings();
 
-        if(!$settings['auth_key'] || !$settings['app_key'] || !$settings['gsmnumberfield']){
+        if(!$settings['auth_key'] || !$settings['app_key']){
             return null;
         }
         $admingsm = explode(",",$template['admingsm']);

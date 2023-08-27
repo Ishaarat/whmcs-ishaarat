@@ -19,16 +19,14 @@ if(!function_exists('AcceptOrder_SMS')){
             return null;
         }
         $settings = $class->getSettings();
-        if(!$settings['auth_key'] || !$settings['app_key'] || !$settings['gsmnumberfield']){
+        if(!$settings['auth_key'] || !$settings['app_key'] || !$settings['wantsmsfield']){
             return null;
         }
 
-        $userSql = "SELECT `a`.`id`,`a`.`firstname`, `a`.`lastname`, `b`.`value` as `gsmnumber`
+        $userSql = "SELECT `a`.`id`,`a`.`firstname`, `a`.`lastname`, `a`.`phonenumber` as `gsmnumber`
         FROM `tblclients` as `a`
-        JOIN `tblcustomfieldsvalues` as `b` ON `b`.`relid` = `a`.`id`
         JOIN `tblcustomfieldsvalues` as `c` ON `c`.`relid` = `a`.`id`
         WHERE `a`.`id` IN (SELECT userid FROM tblorders WHERE id = '".$args['orderid']."')
-        AND `b`.`fieldid` = '".$settings['gsmnumberfield']."'
         AND `c`.`fieldid` = '".$settings['wantsmsfield']."'
         AND `c`.`value` = 'on'
         LIMIT 1";

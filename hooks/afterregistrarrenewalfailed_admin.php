@@ -15,7 +15,7 @@ if(!function_exists('AfterRegistrarRenewalFailed_admin')){
             return null;
         }
         $settings = $class->getSettings();
-        if(!$settings['auth_key'] || !$settings['app_key'] || !$settings['gsmnumberfield']){
+        if(!$settings['auth_key'] || !$settings['app_key']){
             return null;
         }
         $admingsm = explode(",",$template['admingsm']);

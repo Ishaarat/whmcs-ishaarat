@@ -20,17 +20,15 @@ if(!function_exists('InvoiceCreated')){
             return null;
         }
         $settings = $class->getSettings();
-        if(!$settings['auth_key'] || !$settings['app_key'] || !$settings['gsmnumberfield']){
+        if(!$settings['auth_key'] || !$settings['app_key'] || !$settings['wantsmsfield']){
             return null;
         }
 
         $userSql = "
-        SELECT a.total,a.duedate,b.id as userid,b.firstname,b.lastname,`c`.`value` as `gsmnumber` FROM `tblinvoices` as `a`
+        SELECT a.total,a.duedate,b.id as userid,b.firstname,b.lastname,`b`.`phonenumber` as `gsmnumber` FROM `tblinvoices` as `a`
         JOIN tblclients as b ON b.id = a.userid
-        JOIN `tblcustomfieldsvalues` as `c` ON `c`.`relid` = `a`.`userid`
         JOIN `tblcustomfieldsvalues` as `d` ON `d`.`relid` = `a`.`userid`
         WHERE a.id = '".$args['invoiceid']."'
-        AND `c`.`fieldid` = '".$settings['gsmnumberfield']."'
         AND `d`.`fieldid` = '".$settings['wantsmsfield']."'
         AND `d`.`value` = 'on'
         LIMIT 1

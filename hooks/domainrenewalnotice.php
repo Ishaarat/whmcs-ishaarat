@@ -20,7 +20,7 @@ if(!function_exists('DomainRenewalNotice')){
             return null;
         }
         $settings = $class->getSettings();
-        if(!$settings['auth_key'] || !$settings['app_key'] || !$settings['gsmnumberfield']){
+        if(!$settings['auth_key'] || !$settings['app_key'] || !$settings['wantsmsfield']){
             return null;
         }
 
@@ -34,12 +34,11 @@ if(!function_exists('DomainRenewalNotice')){
             $yesterday = mktime (0, 0, 0, $tarih[1], $tarih[2] - $extra, $tarih[0]);
             $today = date("Y-m-d");
             if (date('Y-m-d', $yesterday) == $today){
-                $userSql = "SELECT `a`.`id` as userid,`a`.`firstname`, `a`.`lastname`, `b`.`value` as `gsmnumber`
+                $userSql = "SELECT `a`.`id` as userid,`a`.`firstname`, `a`.`lastname`, `a`.`phonenumber` as `gsmnumber`
             FROM `tblclients` as `a`
-            JOIN `tblcustomfieldsvalues` as `b` ON `b`.`relid` = `a`.`id`
-            JOIN `tblcustomfieldsvalues` as `c` ON `c`.`relid` = `a`.`id`
+                    JOIN `tblcustomfieldsvalues` as `c` ON `c`.`relid` = `a`.`id`
             WHERE `a`.`id` = '".$data['userid']."'
-            AND `b`.`fieldid` = '".$settings['gsmnumberfield']."'
+            
             AND `c`.`fieldid` = '".$settings['wantsmsfield']."'
             AND `c`.`value` = 'on'
             LIMIT 1";

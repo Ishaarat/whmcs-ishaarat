@@ -26,7 +26,7 @@ function ishaarat_wa_activate() {
     $query = "CREATE TABLE IF NOT EXISTS `ishaarat_wa_log` (`id` int(11) NOT NULL AUTO_INCREMENT,`to` varchar(15) DEFAULT NULL,`text` text,`status` varchar(10) DEFAULT NULL,`errors` text,`logs` text,`user` int(11) DEFAULT NULL,`datetime` datetime NOT NULL,PRIMARY KEY (`id`)) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
 	mysql_query($query);
 
-    $query = "CREATE TABLE IF NOT EXISTS `ishaarat_wa_settings` (`id` int(11) NOT NULL AUTO_INCREMENT,`auth_key` varchar(255) CHARACTER SET utf8 NOT NULL,`app_key` varchar(255) CHARACTER SET utf8 NOT NULL,`wantsmsfield` int(11) DEFAULT NULL,`gsmnumberfield` int(11) DEFAULT NULL,PRIMARY KEY (`id`)) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;";
+    $query = "CREATE TABLE IF NOT EXISTS `ishaarat_wa_settings` (`id` int(11) NOT NULL AUTO_INCREMENT,`auth_key` varchar(255) CHARACTER SET utf8 NOT NULL,`app_key` varchar(255) CHARACTER SET utf8 NOT NULL,`wantsmsfield` int(11) DEFAULT NULL,PRIMARY KEY (`id`)) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;";
 	mysql_query($query);
 
     $query = "CREATE TABLE IF NOT EXISTS `ishaarat_wa_templates` (`id` int(11) NOT NULL AUTO_INCREMENT,`name` varchar(50) CHARACTER SET utf8 NOT NULL,`type` enum('client','admin') CHARACTER SET utf8 NOT NULL,`admingsm` varchar(255) CHARACTER SET utf8 NOT NULL,`template` varchar(240) CHARACTER SET utf8 NOT NULL,`variables` varchar(500) CHARACTER SET utf8 NOT NULL,`active` tinyint(1) NOT NULL,`extra` varchar(3) CHARACTER SET utf8 NOT NULL,`description` text CHARACTER SET utf8,PRIMARY KEY (`id`)) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;";
@@ -78,8 +78,7 @@ function ishaarat_wa_output($vars){
             $update = array(
                 "auth_key" => $_POST['auth_key'],
                 "app_key" => $_POST['app_key'],
-                'wantsmsfield' => $_POST['wantsmsfield'] ?? null,
-                'gsmnumberfield' => $_POST['gsmnumberfield'] ?? null
+                'wantsmsfield' => $_POST['wantsmsfield'] ?? null
             );
             $sql = "SELECT `id` FROM `ishaarat_wa_settings` WHERE `id` = 1 LIMIT 1";
             $result = mysql_query($sql);
@@ -115,15 +114,6 @@ function ishaarat_wa_output($vars){
             "showorder" => array("sqltype" => "LIKE", "value" => "on")
         );
         $result = select_query("tblcustomfields", "id,fieldname", $where);
-        $gsmnumber = '';
-        while ($data = mysql_fetch_array($result)) {
-            if ($data['id'] == $settings['gsmnumberfield']) {
-                $selected = 'selected="selected"';
-            } else {
-                $selected = "";
-            }
-            $gsmnumber .= '<option value="' . $data['id'] . '" ' . $selected . '>' . $data['fieldname'] . '</option>';
-        }
         echo '
         <form action="" method="post" id="form">
         <input type="hidden" name="action" value="save" />
@@ -143,15 +133,6 @@ function ishaarat_wa_output($vars){
                         <td class="fieldarea">
                             <select name="wantsmsfield">
                                 ' . $wantsms . '
-                            </select>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="fieldlabel" width="30%">'.$LANG['gsmnumberfield'].'</td>
-                        <td class="fieldarea">
-                            <select name="gsmnumberfield">
-                                ' . $gsmnumber . '
                             </select>
                         </td>
                     </tr>
@@ -206,6 +187,8 @@ function ishaarat_wa_output($vars){
             $desc = json_decode($data['description']);
             if(isset($desc->$LANG['lang'])){
                 $name = $desc->$LANG['lang'];
+            }elseif(!empty($LANG[strtolower($data['name'])])){
+                $name = $LANG[strtolower($data['name'])];
             }else{
                 $name = $data['name'];
             }
@@ -258,7 +241,7 @@ function ishaarat_wa_output($vars){
         </tbody>
                 </table>
             </div>
-            <p align="center"><input type="submit" name="submit" value="Save Changes" class="button" /></p>
+            <p align="center"><input type="submit" name="submit" value="'.$LANG['save'].'" class="button" /></p>
         </form>';
 
     }
@@ -369,10 +352,9 @@ function ishaarat_wa_output($vars){
             }
         }
 
-        $userSql = "SELECT `a`.`id`,`a`.`firstname`, `a`.`lastname`, `b`.`value` as `gsmnumber`
+        $userSql = "SELECT `a`.`id`,`a`.`firstname`, `a`.`lastname`, `a`.`phonenumber` as `gsmnumber`
         FROM `tblclients` as `a`
-        JOIN `tblcustomfieldsvalues` as `b` ON `b`.`relid` = `a`.`id`
-        JOIN `tblcustomfieldsvalues` as `c` ON `c`.`relid` = `a`.`id`
+            JOIN `tblcustomfieldsvalues` as `c` ON `c`.`relid` = `a`.`id`
         WHERE `b`.`fieldid` = '".$settings['gsmnumberfield']."'
         AND `c`.`fieldid` = '".$settings['wantsmsfield']."'
         AND `c`.`value` = 'on' order by `a`.`firstname`";
